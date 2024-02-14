@@ -9,7 +9,10 @@ extends CharacterBody2D
 @onready var ui_image_skip = ui_master.get_node("skip_screen")
 @onready var ui_image_minigame = ui_master.get_node("minigame_screen")
 
+var hp =3;
+
 signal door_interact
+signal enemy_interact
 
 var is_colliding = false
 var door = { 
@@ -42,6 +45,9 @@ func get_input():
 			match door:
 				"fight":
 					door_interact.emit("fight")
+					var enemy = load("res://enemy.tscn")
+					var enemy_instanced = enemy.instantiate()
+					get_node(".").add_child(enemy_instanced)
 				"skip":
 					door_interact.emit("skip")
 				"minigame":
@@ -51,6 +57,15 @@ func get_input():
 			ui_image_minigame.visible = false
 			ui_image_skip.visible = false
 			ui_text.visible = true
+	if $RayCast2D.is_colliding():
+		if Input.is_action_just_pressed("interact"):
+			var collider = $RayCast2D.get_collider()
+			print(collider.name)
+			if collider.name=="Enemy":
+				print("Colliding with " +$RayCast2D.get_collider().name)
+				emit_signal("enemy_interact")
+				
+					
 			
 
 func _physics_process(delta):
@@ -78,9 +93,11 @@ func _on_door_interact(area):
 		"fight":	
 			match ui_image_fight.visible:
 				true:
-					ui_image_fight.visible = false
+					#ui_image_fight.visible = false
+					ui_text.text =""
 				false:
-					ui_image_fight.visible = true
+					#ui_image_fight.visible = true
+					ui_text.text ="Enemy room"
 				_: pass
 		"skip":	
 			match ui_image_skip.visible:
