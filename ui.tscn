@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://vrebpnhmom88"]
+
+[ext_resource type="FontFile" uid="uid://dv5kjg5sc21yg" path="res://assets/SuperMario256.ttf" id="1_76u1t"]
+[ext_resource type="Script" path="res://ui.gd" id="1_ujp0u"]
+[ext_resource type="Texture2D" uid="uid://dynfbahqdyrx7" path="res://fight_screen.png" id="3_0y3sv"]
+[ext_resource type="Texture2D" uid="uid://curpvytihakbm" path="res://assets/skip.png" id="4_a2h3c"]
+[ext_resource type="Texture2D" uid="uid://c082yrcoclpn8" path="res://assets/minigame.png" id="5_23qga"]
+
+[node name="UI" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ujp0u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("1_76u1t")
+text = "SAMPLE UI TEXT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+
+[node name="fight_screen" type="TextureRect" parent="."]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_0y3sv")
+expand_mode = 2
+
+[node name="skip_screen" type="TextureRect" parent="."]
+visible = false
+layout_mode = 2
+texture = ExtResource("4_a2h3c")
+expand_mode = 2
+
+[node name="minigame_screen" type="TextureRect" parent="."]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_23qga")
+expand_mode = 2

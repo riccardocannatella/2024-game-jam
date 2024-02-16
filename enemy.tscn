@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bo52hub3nmqr8"]
+
+[ext_resource type="Script" path="res://StaticBody2D.gd" id="1_pebb0"]
+[ext_resource type="Texture2D" uid="uid://7ft3tjum0kxj" path="res://assets/icon.svg" id="2_6x3vo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lvqmp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6x3vo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5nyj"]
+size = Vector2(127, 130)
+
+[node name="Enemy" type="Node2D"]
+
+[node name="enemy" type="RigidBody2D" parent="."]
+script = ExtResource("1_pebb0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemy"]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_lvqmp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
+position = Vector2(-0.5, 2)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_t5nyj")
+
+[node name="Timer" type="Timer" parent="enemy"]
+one_shot = true
